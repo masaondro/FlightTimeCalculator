@@ -29,11 +29,11 @@ public class FlightTimeCalculator {
 			if (numFlights == 0) {
 				System.out.println("No flights found between Vladivostok and Tel Aviv.");
 			} else {
-				double avgFlightTime = (double) totalFlightTime / numFlights;
+				double avgFlightTime = (double) totalFlightTime / (numFlights * 60) ;
 				System.out.printf("Average flight time between Vladivostok and Tel Aviv: %.2f hours\n", avgFlightTime);
 				Collections.sort(flightTimes);
 				double percentile90 = getPercentile(flightTimes, 90);
-				System.out.printf("90th percentile flight time between Vladivostok and Tel Aviv: %.2f hours\n", percentile90);
+				System.out.printf("90th percentile flight time between Vladivostok and Tel Aviv: %.2f hours\n", percentile90 / 60);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class FlightTimeCalculator {
 		Date date1 = format.parse(dateTime1);
 		Date date2 = format.parse(dateTime2);
 		long diffInMillis = date2.getTime() - date1.getTime();
-		return (int) (diffInMillis / (60 * 60 * 1000));
+		return (int) (diffInMillis / (60 * 1000));
 	}
 
 	private static double getPercentile(List<Integer> values, int percentile) {
